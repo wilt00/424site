@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Will Toher - CS 424 Spring 2018</title>
+        <meta name="author" content="Will Toher">
+    </head>
+    <body>
+        <h1>Project 1 - "Just Breathe"</h1>
+        <a href="https://www.shinyapps.io/admin/#/application/708691">Project on Shinyapps</a>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/wJzKjyIYYGs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <p>Please note that the edges of this video were cut off during the transcoding process. My slider for selecting the year and the menus for selecting state and county are offscreen to the left.</p>
+        <h2>Description</h2>
+        <p>This is a visualization of air quality data as collected by the EPA throughout the United States from 1980 to 2018. For the given state, county, and year, we show that year's proportion of days with an air quality index that is good, moderate, unhealthy for sensitive groups, very unhealthy, and hazardous, as well as the absolute number of days that fall into each of these categories. We also show the proportion and absolute number of days on which each of the following pollutants was the most concentrated: Carbon dioxide, nitrogen dioxide, ozone, particulate matter with a size of 2.5 microns, particulate matter with a size of 10 microns, and sulfur dioxide. For the given state and county across all years, we show the maximum, 90th percentile, and median air quality index, as well as the proportion of days with a majority of each of the measured pollutants. We also show the location of this county in an interactive map.</p>
+        <h2>Data and Transformations</h2>
+        <p>This visualization presents data from the Environmental Protection Agency's air quality measurements. In particular, it presents information about Air Quality Index (AQI) measurements, as well as on how many days of the given year each of the measured pollutants was the most prevalent. The data is broken down by county, nationwide.</p>
+        <p>I read in air quality data from the given csv files for each year, and combined them row-wise into a single data frame.</p>
+        <p>To find the location of each county, I read information about locations of EPA sensor locations from the linked csv (https://aqs.epa.gov/aqsweb/airdata/aqs_sites.zip). Since the precise locations of these stations are not relevant to the visualization, and since there are several stations listed per county, many of which are inactive, I grouped together all stations for each county (using the dplyr library), and calculated the mean latitude and longitude. This provides us with a coarse location for each county.</p>
+        <p>I then performed transformations on the data on a visualization-by-visualization basis:</p>
+        <ul>
+            <li>For the pie graph of AQI quality, I filter the dataframe to get the subset of rows with the selected year, county, and state. I then transpose the dataframe so that each of the AQI cells is now its own row. I calculate the percentage of measured days represented by each row, and graph as a pie chart.</li>
+            <li>The bar graph and table of AQI quality are transformed in the same way, except that no percentages are calculated.</li>
+            <li>For each pie graph depicting the proportion of days for which a given pollutant is dominant, I first filter the dataframe to get the subset of rows with the selected year, county, and state. I extract the value for one of the six pollutants, and create a new dataframe with this value, and the total number of days measured for this year less this value. I calculate the percentage of the year represented by each of these two values. I also convert the pollutant names to factors for use by ggplot. I then create a pie chart with this information.
+                I repeat this process for each of the six pollutants.</li>
+            <li>For the bar graph of the number of days for which each pollutant is dominant, I follow the same process as for AQI quality, but with the pollutant columns. Additionally, I remove the first five characters from each row name so that the labels more clearly represent the chemical being represented.</li>
+            <li>For the line graph of AQI quality over time, no transformations are necessary beyond taking a subset of the dataframe for the given state and county. However, I do check whether the maximum value is greater than 400 for any year in the range; if so, I increase the size of the y axis. This value was chosen by inspection; a more rigorous treatment might have used standard deviation of the entire dataset to determine such a default scale value.</li>
+            <li>For the line graph representing the proportion of days for which each pollutant was prevalent for each year in the dataset, I take the subset of rows with the selected state and county, and calculate the percentage of days represented by each pollutant. I graph these, making sure to use the same color palette as the pie charts.</li>
+            <li>For the table representing the proportion of days for which each pollutant was prevalent for each year in the dataset, I use the same process as with the line graph.</li>
+        </ul>
+        <h2>Setup Instructions</h2>
+        <p><a href="project1.zip">Source Code</a></p>
+        <p>This visualization requires a working R environment. First, install RStudio as appropriate for your platform. Then, through the R terminal, install the packages "shiny", "ggplot2", "dplyr", "purrr", and "leaflet". It should now be possible to run the Shiny application by clicking on the "Run App" button in RStudio. You may wish to run "downloadData.r" to download fresh copies of the CSV data.
+        One dependency, st, required me on Ubuntu to add the ppa "ubuntugis/ubuntugis-unstable" and install the packages "libudunits2-dev", "libgdal-dev", "libgeos-dev", and "libproj-dev". However, I now suspect that this was unnecessary.</p>
+    </body>
+</html>
