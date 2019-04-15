@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Will Toher - CS 424 Spring 2018</title>
+        <meta name="author" content="Will Toher">
+    </head>
+    <body>
+        <h1>Viewer's Choice Presentation</h1>
+        <p><a href="index.html">Back to Homepage</a></p>
+        <h2>1. Introduction</h2>
+        <ul><li><b>Visualization:</b> <a href="https://idinnov.shinyapps.io/pasa-segura-medellin/">Pasa-Segura-Medellín</a></li></ul>
+        <p>
+        This visualization depicts traffic accident data in the city of Medellín, Colombia between 2014 and 2018. The visualization was built by Jorge Iván Pérez Rave of the Colombian consulting firm IDINNOV, seemingly as a demonstration of their data visualization capabilities.
+        </p>
+        <h2>2. Data</h2>
+        <p>
+        This data is sourced from the Colombian national government (<a href="https://datos.gov.co/">datos.gov.co</a>) and Medellín city government (<a href="medellin.gov.co">medellin.gov.co</a>), specifically the <a href="https://www.medellin.gov.co/geomedellin/">GEO Medellín Project</a>. The visualization does an exemplary job of citing sources not only for the data used, but also for code and libraries used for the construction of the site. There is little information, however, of how this data was processed to produce the graphs shown.
+        </p>
+        <h2>3. Visualization Critique</h2>
+        <h3>"GRAVEDAD DE LOS ACCIDENTES VIALES" - GRAVITY OF ROAD ACCIDENTS</h3>
+        <p>
+        This is a bar graph showing the relative proportions of traffic accidents, divided into the categories "Herido" - Injuries, "Solo Daños" - Only damage (i.e. no injuries), and "Muerto" - Deaths.
+        </p>
+        <img src="vc/424_vc_1.jpg" />
+        <h4>Good:</h4>
+        <ul>
+            <li>Good use of color to indicate severity of accident - blue for least bad, red for most bad, orange in the middle.</li>
+            <li>Good use of labels - shows overall number and percentage listed.
+        </ul>
+        <h4>Bad:</h4>
+        <ul>
+            <li>Order of bars should go from least bad on the left to most bad on the right</li>
+            <li>Graph allows user to choose "Day, Month, Year" above the graph. It is unclear what this is for - to show average by day, rather than by year? Does not add to understanding of data.</li>
+        </ul>
+        <h3>"SEGMENTACIÓN DE ACCIDENTES VIALES" - SEGMENTATION OF ROAD ACCIDENTS</h3>
+        <p>Several graphs are concealed by a dropdown menu here, labeled "Segmentos" - Segments.</p>
+        <p>The first segment is "Hours". It took me a long time to understand what was happening in this graph. This is a horizontally oriented bar graph in which the vertical axis represents hour of the day - bars representing the percentage of accidents which take place at that hour of the morning extend to the left, and for the evening extend to the right, from a central 0 axis.</p>
+        <img src="vc/424_vc_2.jpg" />
+        <h4>Good:</h4>
+        <ul>
+            <li>Nothing.</li>
+        </ul>
+        <h4>Bad:</h4>
+        <ul>
+            <li>The cyclic nature of the data is obscured by the presentation. It is easy to compare, for example 1 AM with 1 PM, but this is not a useful comparison.</li>
+            <li>The horizontal axis is marked seemingly at random - for the default "Everyone" grouping (which shows all accidents, regardless of severity), the numbers start at 1540 on the left, descend to 120, then climb again to 2880. The 0 line should be clearly marked, and markings should move outward from it at regular, sensible intervals.</li>
+            <li>There appears to be a spike in accidents at "12 PM", and a sudden drop at "12 AM". This is because the developers of this graph have neglected that "12 PM" is in the afternoon, and "12 AM" is at night - this bar belongs at the bottom of the graph, rather than at the top.</li>
+        </ul>
+        <p>One of the more interesting graphs in this section is a bar graph of accident frequency by type of street or intersection. It appears from this data that the vast majority of accidents occur in locations of the category "Tramo de via" - tramway or train tracks.</p>
+        <img src="vc/424_vc_4.jpg" />
+        <h4>Good:</h4>
+        <ul>
+            <li>Colors would not be meaningful in this graph, so the graph keeps them consistent. (The light grey is a bit hard to read, though).</li>
+        </ul>
+        <h4>Bad:</h4>
+        <ul>
+            <li>I am suspicious of just how much higher the accident figures are for train lines.</li>
+            <li>There is no indication of whether this data has been normalized by the number of such intersection around the city - i.e. it is unclear whether the lower frequency of accident for "Glorieta" (roundabout) is lower than "Interseccion" (intersection), simply because there are fewer roundabouts than intersections, or because roundabouts are in fact safer than intersections.
+        </ul>
+        <h3>"MAPA DE ACCIDENTALIDAD" - ACCIDENT MAP</h3>
+        <p>The locations of fatal accidents are marked on a map. From the map, it appears that most fatal accidents take place on major streets.</p>
+        <img src="vc/424_vc_5.jpg" />
+        <h4>Good:</h4>
+        <ul>
+            <li>It is valuable to be able to see this information laid out geographically, especially for those of us unfamiliar with the city of Medellín. From the map we can draw conclusions about the type of streets which seem to have a higher incidence of accident.</li>
+        </ul>
+        <h4>Bad:</h4>
+        <ul>
+            <li>There is a parameter labelled "Propor.casos". It is unclear what this parameter controls. The range is between 0.1 and 1, with the number of points plotted on the map increasing as the parameter increases. My assumption is that lower values of this parameter indicate that the map is showing more common accident sites, but this should be made explicit.</li>
+            <li>Colors are inconsistent between the first bar graph and this map for each category.</li>
+        </ul>
+        <h3>"CALLES Y CARRERAS QUE DESCRIBEN LA ACCIDENTALIDAD"</h3>
+        <p>I find this one of the more interesting graphs in the project. The streets of Medellín are broken up into Calles, which run East-West, and Carreras, which run North-South. This graph treats each Calle and Carrera number as a coordinate, and in so doing normalizes the accident locations into a rectangular grid. This allows us to see quite clearly which streets are the most dangerous, as these appear as straight lines on the graph. However, there are shortcomings of implementation which keep this from living up to its promise.</p>
+        <img src="vc/424_vc_6.jpg" />
+        <h4>Good:</h4>
+        <ul>
+            <li>It is clear from the plot which streets are most dangerous. For example, in the given picture we can see that a single Carrera is the location for most of the fatal accidents in the central district of La Candelaria.</li>
+        </ul>
+        <h4>Bad:</h4>
+        <ul>
+            <li>The labels are set too far apart - it is very difficult to see from the graph which street a particular accident happened on.</li>
+            <li>The graph features a parameter "Zoom", allowing the user to manually increase or decrease the zoom level. This should not be required - the axes should be set so that the maximum and minimum street numbers of a district are the bounds of the graph.</li>
+            <li>The graph is less useful for the "Only Damage" category, where every intersection has had an accident. Perhaps color or size could have been used here to indicate frequency of accident at each intersection.</li>
+        </ul>
+        <h3>"EVOLUCIÓN DE LA ACCIDENTALIDAD" - EVOLUTION OF ACCIDENTS</h3>
+        <p>This graph shows the total number of accidents by month for the years between 2014 and 2018. </p>
+        <img src="vc/424_vc_7.jpg" />
+        <h4>Good:</h4>
+        <ul>
+            <li>The clearest purpose of this graph is to show how the average number of accidents varies by month. We can see that there is an early spike in accidents in March, and a peak in August. This does not appear to be correlated with weather - Colombia is on the equator, and temperatures are consistently in the 70s F / 20s C year round. Peaks in rainfall occur in May and October, which is not reflected in this data. (Source: <a href="https://en.wikipedia.org/wiki/Medell%C3%ADn#Climate">Wikipedia</a>)</li>
+            <li>This graph makes effective use of Plot.ly's mouseover labelling to only show labels when necessary.</li>
+        </ul>
+        <h4>Bad:</h4>
+        <ul>
+            <li>The graph does not live up to its name, as it is hard to see any trend between years.</li>
+            <li>As with most Plot.ly graphs, the user has the power to completely mess up the image.</li>
+        </ul>
+
+        <h3></h3>
+        <p></p>
+        <img src="" />
+        <h4>Good:</h4>
+        <ul>
+            <li></li>
+        </ul>
+        <h4>Bad:</h4>
+        <ul>
+            <li></li>
+        </ul>
+    </body>
+</html>
