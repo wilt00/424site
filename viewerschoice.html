@@ -3,6 +3,12 @@
     <head>
         <title>Will Toher - CS 424 Spring 2018</title>
         <meta name="author" content="Will Toher">
+        <meta charset="utf-8"/>
+        <style>
+        img {
+            max-width: 100%
+        }
+        </style>
     </head>
     <body>
         <h1>Viewer's Choice Presentation</h1>
@@ -95,17 +101,65 @@
             <li>The graph does not live up to its name, as it is hard to see any trend between years.</li>
             <li>As with most Plot.ly graphs, the user has the power to completely mess up the image.</li>
         </ul>
-
-        <h3></h3>
-        <p></p>
-        <img src="" />
+        <h3>MÉTRICAS SOBRE COMUNAS - Metrics By Commune</h3>
+        <p>This is a set of graphs which break up the city of Medellín into its constituent communes, or neighborhoods. The metric being graphed is chosen with a dropdown menu. To the non-Spanish speaker, these labels range from cryptic to completely indecipherable, a valuable reminder of the accessibility cost of nonstandard abbreviation, but fortunately a fuller description of most graph are available after selecting them.</p>
+        <img src="vc/424_vc_8.jpg" />
         <h4>Good:</h4>
         <ul>
-            <li></li>
+            <li>The graphs showing the number of accidents relative to the population of each district are particularly valuable. From this, we can see that the central district of La Candelaria has by far the highest proportion of accidents per capita, which makes sense as this is not a residential district.</li>
         </ul>
         <h4>Bad:</h4>
         <ul>
-            <li></li>
+            <li>Colors are not consistent between graphs in this category - the same colors appear in the same order regardless of which order the communes are in. It would be better if each commune were assigned a color, which would make comparisons easier between metrics.</li>
+            <li>The way these graphs are broken up such that only one is visible at a time makes them difficult to compare. For example, it might be interesting t see separate bars for accident severity (injury, damage only, fatal) graphed on the same plot, but instead these are three separate plots.</li>
+            <li>Some of the graphs in this category are completely uninteresting. For example, the gender proportion by commune is irrelevant to the topic of the visualization (or at least no argument for relevance is put forward).</li>
+            <li>Several of the graphs in this category rank the communes on a scale from 1 to 5, e.g. "Comuna en términos de cobertura de transporte público (1. Muy mal,…, 5. Muy bien)" - "Commune in terms of public transport coverage (1. Very bad, ..., 5. Very good)". It is unclear whether this is survey data, and if so from what source, or if this has been calculated from geographic data. In any case, it is impossible to correlate this information with the accident data using the given visualizations.</li>
+            <li>There are 37 graphs hidden under this dropdown menu. These should be edited down to only the most relevant.</li>
         </ul>
+        <h3>"RELACIONES BIVARIADAS DE MÉTRICAS SOBRE COMUNAS" - Bivariate Relations of Metrics By Commune</h3>
+        <p>This graph addresses many of the failings of the previous graph by allowing the user to compare any two metrics of their choice. In the upper left is a histogram for variable 1, in the bottom right a histogram for variable 2, and in the bottom left a scatter graph relating the two, with a centroid and some sort of trend line marked. The large number in the upper right is the Kendall rank correlation coefficient, a measurement of assotiation between the chosen variables.</p>
+        <p>In this picture, I have chosen to graph total accidents against quality of public transport connections. This shows a moderate correlation, which may be explained by the tendency of areas which are well-served by public transportation to also have heavy traffic.</p>
+        <img src="vc/424_vc_9.jpg" />
+        <h4>Good:</h4>
+        <ul>
+            <li>There is a checkbox which excludes La Candelaria, consistently the largest outlier across many metrics, from the dataset.</li>
+            <li>This is by far the most interactive visualization in the project, giving the user a great deal of power to explore their own hypotheses. This would be a good thing, but...</li>
+        </ul>
+        <h4>Bad:</h4>
+        <ul>
+            <li>There is no attempt being made by the authors to draw out interesting conclusions from this dataset. This could have been done by, for example, choosing two variables to start with which show a strong correlation - but the authors left the defaults at the first two variables.</li>
+            <li>Labels are missing from the histograms, and unnecessarily present on the Kendall coefficient</li>
+            <li>Internal R variable names continue to be used where more descriptive text would aid understanding.</li>
+        </ul>
+        <h3>"PATRONES DE AGRUPACIÓN ENTRE COMUNAS" - Patterns of Grouping Between Communes</h3>
+        <p>This is another interesting graph, as it relates not to absolute values or proportions of metrics, but to how similar any two communes are to one another.</p>
+        <img src="vc/424_vc_10.jpg" />
+        <h4>Good:</h4>
+        <ul>
+            <li>The graph does an excellent job of showing just how much of an outlier La Candelaria is compared with the rest of the city.</li>
+        </ul>
+        <h4>Bad:</h4>
+        <ul>
+            <li>Two options are provided to tweak the graph - the distance algorithm being used (Euclidean, Manhattan, etc), and the aggregation function (average, distant neighbor, etc). This is too much implementation detail for the user - the author should have chosen sensible defaults for the data and indicated how the values were being calculated. The user should not be required to have the background knowledge needed to choose between these options, which have significant impacts on the graph produced.</li>
+        </ul>
+        <h3>FACTORES LATENTES ASOCIADOS CON EVENTOS DE ACCIDENTALIDAD USANDO REGRESIÓN MÚLTIPLE y ACP. DATOS 2016 - Latent Factors Associated With Accident Events Using Multiple Regression and Acp. Data 2016</h3>
+        <p>This section is undeserving of the name of visualization. It is a table describing the multiple regression techniques being used, accompanied by a rudimentary line graph. It is very unclear to a lay audience (like myself) what is happening here.</p>
+        <img src="vc/424_vc_11.jpg" />
+        <h3>JORNADA Y HORARIOS ASOCIADOS CON EVENTOS DE ACCIDENTALIDAD BAJO ENFOQUE PARETO. DATOS 2014 - 2018_1 (hasta mayo 2018) - Day and Schedules Associated with Accident Events</h3>
+        <p>This section is the only one to break down each category of accident (fatal, injury, damage only) into subcategories, which are very interesting. For example, we can see from this graph that most accidents in La Candelari are caused by "Atropello" (Being run over), followed by "Choque"(Shock), and only a very small proportion being "Otros"(Other). This would seem to imply that most victims of traffic accident are not drivers, but bystanders.</p>
+        <img src="vc/424_vc_12.jpg" />
+        <h4>Good:</h4>
+        <ul>
+            <li>Valuable breakdown of data into subcategories</li>
+            <li>Users can explore by Commune, Severity, and Year</li>
+        </ul>
+        <h4>Bad:</h4>
+        <ul>
+            <li>The use of the same colors between categories is confusing.</li>
+            <li>The graphs rehash much of the same information as the earlier hours graph (but better). Only one of these two should have been given.</li>
+        </ul>
+
+        <h2>4. Conclusion</h2>
+        <p>I would not hire this firm. Despite some innovative presentation, details are consistently neglected, and data is presented without meaningful conclusions being offered.</p>
     </body>
 </html>
